@@ -1,0 +1,8 @@
+<div class="form-container">
+  <div class="form-header">
+    <h2>{{ title }}</h2>
+    <p>{{ subtitle }}</p>
+  </div>
+  <ng-content></ng-content>
+  <button class="btn-primary" (click)="submit()" [disabled]="disablePrimaryButton">{{ primaryBtnText }}</button>
+</div>

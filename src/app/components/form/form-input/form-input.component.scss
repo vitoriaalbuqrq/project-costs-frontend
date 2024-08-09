@@ -1,0 +1,29 @@
+@import "../../../../styles/variables.scss";
+
+
+.input-wrapper {
+    color: $text-color;
+    font-size: 16px;
+    text-align: start;
+    margin-bottom: 15px;
+
+    label {
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    .input-content{
+        border-radius: 8px;
+        display: flex;
+        width: 100%;
+        border: 0.8px solid #bdbdbd;
+    }
+
+    input {
+        border: none;
+        border-radius: 8px;
+        background-color: $gray-bg;
+        padding: 12px 0 12px 20px;
+        width: 100%;
+    }
+}

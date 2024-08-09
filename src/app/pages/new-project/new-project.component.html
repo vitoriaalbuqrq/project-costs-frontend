@@ -1,0 +1,55 @@
+<main>
+  <app-form
+    title="Criar Projeto"
+    subtitle="Crie seu projeto para depois adicionar os serviços"
+    primaryBtnText="Criar projeto"
+    (submit)="submit()"
+    [disablePrimaryButton]="!projectCreateForm.valid"
+  >
+    <form [formGroup]="projectCreateForm">
+      <app-form-input
+        formControlName="projectTitle"
+        inputName="projectTitle"
+        type="text"
+        label="Título"
+        placeholder="Informe o título do projeto"
+      ></app-form-input>
+      <app-form-input
+        formControlName="projectDescription"
+        inputName="projectDescription"
+        type="text"
+        label="Descrição"
+        placeholder="Informe a descrição do projeto"
+      ></app-form-input>
+      <app-form-input
+        formControlName="projectStartDate"
+        inputName="projectStartDate"
+        type="date"
+        label="Data de início"
+        placeholder="Informe a data de início do projeto"
+      ></app-form-input>
+      <app-form-input
+        formControlName="projectEndDate"
+        inputName="projectEndDate"
+        type="date"
+        label="Data final ou prevista"
+        placeholder="Informe a data final ou prevista"
+      ></app-form-input>
+      <app-form-input
+        formControlName="projectBudget"
+        inputName="projectBudget"
+        type="number"
+        label="Orçamento do projeto"
+        placeholder="1.000"
+      ></app-form-input>
+      
+      <div class="form-select">
+        <label for="projectCategory">Categoria</label>
+        <select id="projectCategory" formControlName="projectCategory">
+          <option value="" disabled selected>Selecione uma categoria</option>
+          <option *ngFor="let category of categories" [value]="category">{{ category }}</option>
+        </select>
+      </div>
+    </form>
+  </app-form>
+</main>

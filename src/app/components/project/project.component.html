@@ -1,0 +1,17 @@
+<div class="container-info">
+  <div class="header">
+    <div class="icon" [ngStyle]="{ 'background-color': getCategoryInfo().color }">
+      <i class="{{ getCategoryInfo().icon }}"></i>
+    </div>
+    <div class="title">
+      <p>{{ project.category }}</p>
+      <h5>{{ project.title }}</h5>
+    </div>
+  </div>
+  <h6>Orçamento:</h6>
+  <p>R$ {{ project.budget }} <span>/ 10.000,000</span></p>
+  <div class="action-buttons">
+    <a [routerLink]="['/user/editproject', project.id]">Editar</a>
+    <a >Excluir</a>
+  </div>
+</div>

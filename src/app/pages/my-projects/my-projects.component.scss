@@ -1,0 +1,17 @@
+main{
+  padding: 3em 4em;
+
+  .title-container{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 2em;
+  }
+
+  .projects-container{
+    display: flex;
+    justify-content: start;
+    align-items: stretch;
+    flex-wrap: wrap;
+    gap: 25px;
+  }
+}

@@ -1,0 +1,41 @@
+@import '../../../styles/variables.scss';
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 40px;
+  background-color: $gray-bg;
+  box-shadow: rgba(67, 71, 85, 0.27) 0px 0px 0.25em, rgba(90, 125, 188, 0.05) 0px 0.25em 1em;
+
+  img{
+    width: 140px;
+  }
+
+  a{
+    text-decoration: none;
+    color: $secondary-color;
+    font-weight: 500;
+  }
+
+  ul{
+    display: flex;
+    align-items: center;
+    list-style: none;
+    gap: 20px;
+
+    li {
+      cursor: pointer;
+    }
+
+    .btn-link{
+      background-color: $primary-color;
+      padding: 5px 10px;
+      border-radius: 10px;
+      
+      a{
+        color: $gray-bg;
+      }
+    }
+  }
+}
