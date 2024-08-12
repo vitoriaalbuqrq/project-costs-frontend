@@ -1,4 +1,10 @@
-<div *ngIf="project">
-  <h2>Editar Projeto</h2>
+<main>
+  <app-project-edit-info
+  *ngIf="project"
+  [project]="project"
+  ></app-project-edit-info>
 
-</div>
+  <app-service-container>
+    <app-service-card></app-service-card>
+  </app-service-container>
+</main>

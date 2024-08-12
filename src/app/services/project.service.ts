@@ -7,8 +7,7 @@ import { Project } from '../models/project';
   providedIn: 'root'
 })
 export class ProjectService {
-  private apiUrl = 'http://demo9128764.mockable.io/projects';
-  //private apiUrl = 'http://localhost:8080/projects';
+  private apiUrl = 'http://localhost:8080/projects';
 
   constructor(private httpClient: HttpClient) { }
 
@@ -16,7 +15,7 @@ export class ProjectService {
     return this.httpClient.get<Project[]>(this.apiUrl);
   }
 
-  getProjectById(id: string): Observable<Project> {
+  getProjectById(id: number): Observable<Project> {
     return this.httpClient.get<Project>(`${this.apiUrl}/${id}`);
   }
 

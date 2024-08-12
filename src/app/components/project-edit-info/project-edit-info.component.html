@@ -1,0 +1,33 @@
+<div class="container">
+  <div class="header">
+    <div class="header-info">
+      <div class="icon" [ngStyle]="{ 'background-color': getCategoryInfo().color }">
+        <i class="{{ getCategoryInfo().icon }}"></i>
+      </div>
+      <div class="title">
+        <p>{{ project.category }}</p>
+        <h5>{{ project.title }}</h5>
+      </div>
+    </div>
+    <div class="header-btn">
+      <a routerLink="/user/newproject">Criar projeto</a>
+    </div>
+  </div>
+  <p class="description">{{ project.description}}</p>
+  <hr>
+  <div class="budget">
+    <div>
+      <h6>Total do orçamento:</h6>
+      <p>R$ {{ project.budget }}</p>
+    </div>
+    <div>
+      <h6>Total utilizado:</h6>
+      <p>R$ {{ project.budget }}</p>
+    </div>
+    <div>
+      <h6>Serviços adicionados:</h6>
+      <p>3</p>
+    </div>
+
+  </div>
+</div>
