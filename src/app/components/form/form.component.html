@@ -3,6 +3,51 @@
     <h2>{{ title }}</h2>
     <p>{{ subtitle }}</p>
   </div>
-  <ng-content></ng-content>
-  <button class="btn-primary" (click)="submit()" [disabled]="disablePrimaryButton">{{ primaryBtnText }}</button>
+  <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+    <app-form-input
+      formControlName="projectTitle"
+      inputName="projectTitle"
+      type="text"
+      label="Título"
+      placeholder="Informe o título do projeto"
+    ></app-form-input>
+    <app-form-input
+      formControlName="projectDescription"
+      inputName="projectDescription"
+      type="text"
+      label="Descrição"
+      placeholder="Informe a descrição do projeto"
+    ></app-form-input>
+    <app-form-input
+      formControlName="projectStartDate"
+      inputName="projectStartDate"
+      type="date"
+      label="Data de início"
+      placeholder="Informe a data de início do projeto"
+    ></app-form-input>
+    <app-form-input
+      formControlName="projectEndDate"
+      inputName="projectEndDate"
+      type="date"
+      label="Data final ou prevista"
+      placeholder="Informe a data final ou prevista"
+    ></app-form-input>
+    <app-form-input
+      formControlName="projectBudget"
+      inputName="projectBudget"
+      type="number"
+      label="Orçamento do projeto"
+      placeholder="1.000"
+    ></app-form-input>
+
+    <div class="form-select">
+      <label for="projectCategory">Categoria</label>
+      <select id="projectCategory" formControlName="projectCategory">
+        <option value="" disabled selected>Selecione uma categoria</option>
+        <option *ngFor="let category of categories" [value]="category">{{ category }}</option>
+      </select>
+    </div>
+
+    <button class="btn-primary" type="submit" [disabled]="disablePrimaryButton">{{ primaryBtnText }}</button>
+  </form>
 </div>

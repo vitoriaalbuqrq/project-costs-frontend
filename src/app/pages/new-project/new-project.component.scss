@@ -5,19 +5,4 @@ main {
   width: 50%;
   margin: 0 auto;
 
-  .form-select{
-    color: $text-color;
-    display: flex;
-    flex-direction: column;
-    
-    label{
-      margin-bottom: 5px;
-    }
-
-    select{
-      padding: 5px;
-      border-radius: 8px;
-
-    }
-  }
 }

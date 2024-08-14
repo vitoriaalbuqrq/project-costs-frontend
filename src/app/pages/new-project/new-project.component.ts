@@ -9,6 +9,7 @@ import { Project } from '../../models/project';
 import { FormInputComponent } from "../../components/form/form-input/form-input.component";
 import { FormComponent } from "../../components/form/form.component";
 import { FormSelectComponent } from '../../components/form/form-select/form-select.component';
+import { Router } from '@angular/router';
 
 interface ProjectForm {
   projectTitle: FormControl,
@@ -38,13 +39,13 @@ export class NewProjectComponent {
   projectCreateForm!: FormGroup<ProjectForm>;
   categories: Category[] = [];
 
-  constructor(private projectService: ProjectService, private categoryService: CategoryService) { }
+  constructor(private projectService: ProjectService, private categoryService: CategoryService, private router: Router) { }
 
   ngOnInit() {
     this.categories = Object.values(Category);
     this.projectCreateForm = new FormGroup<ProjectForm>({
       projectTitle: new FormControl('', [Validators.required]),
-      projectBudget: new FormControl('', [Validators.required]),
+      projectBudget: new FormControl(0, [Validators.required]),
       projectCategory: new FormControl('', [Validators.required]),
       projectDescription: new FormControl('', [Validators.required]),
       projectStartDate: new FormControl('', [Validators.required]),
@@ -68,6 +69,7 @@ export class NewProjectComponent {
       this.projectService.createProject(project).subscribe(
         response => {
           console.log('Projeto criado com sucesso:', response);
+          //this.router.navigate(['/projects']);
         },
         error => {
           console.error('Erro ao criar projeto:', error);

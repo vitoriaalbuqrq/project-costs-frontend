@@ -39,4 +39,20 @@
         box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;
     }
   }
+
+  .form-select{
+    color: $text-color;
+    display: flex;
+    flex-direction: column;
+    
+    label{
+      margin-bottom: 5px;
+    }
+
+    select{
+      padding: 5px;
+      border-radius: 8px;
+
+    }
+  }
 }

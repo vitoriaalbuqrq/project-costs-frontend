@@ -1,10 +1,11 @@
 <main>
-  <app-project-edit-info
-  *ngIf="project"
-  [project]="project"
-  ></app-project-edit-info>
-
-  <app-service-container>
-    <app-service-card></app-service-card>
-  </app-service-container>
+  <app-form
+    title="Editar Projeto"
+    subtitle="Atualize as informações do projeto"
+    primaryBtnText="Salvar alterações"
+    [formGroup]="projectEditForm"
+    [categories]="categories"
+    [disablePrimaryButton]="!projectEditForm.valid"
+    (formSubmit)="submit()">
+  </app-form>
 </main>

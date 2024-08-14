@@ -10,7 +10,7 @@
       </div>
     </div>
     <div class="header-btn">
-      <a routerLink="/user/newproject">Criar projeto</a>
+      <a [routerLink]="['/user/editproject', project.id]">Editar Projeto</a>
     </div>
   </div>
   <p class="description">{{ project.description}}</p>

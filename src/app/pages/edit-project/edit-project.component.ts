@@ -1,59 +1,106 @@
 import { Component, OnInit } from '@angular/core';
+import {
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
+import { Category } from '../../models/enum/category.enum';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ProjectService } from '../../services/project.service';
-import { ActivatedRoute } from '@angular/router';
+import { CategoryService } from '../../services/category.service';
 import { Project } from '../../models/project';
 import { CommonModule } from '@angular/common';
-import { ProjectEditInfoComponent } from "../../components/project-edit-info/project-edit-info.component";
-import { ServiceContainerComponent } from "../../components/service-container/service-container.component";
-import { ServiceCardComponent } from "../../components/service-card/service-card.component";
+import { FormComponent } from '../../components/form/form.component';
+
+interface ProjectForm {
+  projectTitle: FormControl;
+  projectBudget: FormControl;
+  projectCategory: FormControl;
+  projectDescription: FormControl;
+  projectStartDate: FormControl;
+  projectEndDate: FormControl;
+}
 
 @Component({
   selector: 'app-edit-project',
   standalone: true,
-  imports: [CommonModule, ProjectEditInfoComponent, ProjectEditInfoComponent, ServiceContainerComponent, ServiceCardComponent],
+  imports: [CommonModule, ReactiveFormsModule, FormComponent],
   templateUrl: './edit-project.component.html',
   styleUrl: './edit-project.component.scss',
 })
-export class EditProjectComponent implements OnInit{
-  //project: Project = {id: 1, title: 'teste', budget: 100, category: 'Other', description: 'teste teste teste', startDate: '', endDate: ''};
-  //projectId: number | null = null;
-  project!: Project;
+export class EditProjectComponent implements OnInit {
+  projectEditForm!: FormGroup<ProjectForm>;
+  categories: Category[] = [];
+  projectId!: number;
 
   constructor(
     private route: ActivatedRoute,
-    private projectService: ProjectService
-  ) { }
+    private projectService: ProjectService,
+    private categoryService: CategoryService,
+    private router: Router
+  ) {
+    //Inicializa o form vazio
+    this.projectEditForm = new FormGroup<ProjectForm>({
+      projectTitle: new FormControl(''),
+      projectBudget: new FormControl(''),
+      projectCategory: new FormControl(''),
+      projectDescription: new FormControl(''),
+      projectStartDate: new FormControl(''),
+      projectEndDate: new FormControl(''),
+    });
+  }
 
   ngOnInit(): void {
-    const id = Number(this.route.snapshot.paramMap.get('id'));
-    if (id) {
-      this.projectService.getProjectById(id).subscribe({
-        next: (data) => {
-          this.project = data;
-          //this.isLoading = false;
-        },
-        error: (err) => {
-          //this.errorMessage = 'Failed to load project details.';
-          //this.isLoading = false;
-        }
-      });
+    this.categories = Object.values(Category);
+    this.route.paramMap.subscribe((params) => {
+      this.projectId = +params.get('id')!;
+      if (this.projectId) {
+        this.projectService
+          .getProjectById(this.projectId)
+          .subscribe((project) => {
+            this.initializeForm(project);
+          });
+      }
+    });
+  }
+
+  initializeForm(project: Project) {
+    this.projectEditForm.setValue({
+      projectTitle: project.title,
+      projectBudget: project.budget,
+      projectCategory: project.category,
+      projectDescription: project.description,
+      projectStartDate: project.startDate,
+      projectEndDate: project.endDate,
+    });
+  }
+
+  submit() {
+    if (this.projectEditForm.valid) {
+      const formValues = this.projectEditForm.value;
+
+      const updatedProject: Project = {
+        title: formValues.projectTitle,
+        description: formValues.projectDescription,
+        category: formValues.projectCategory as Category,
+        startDate: formValues.projectStartDate,
+        endDate: formValues.projectEndDate,
+        budget: formValues.projectBudget,
+        id: this.projectId,
+      };
+
+      this.projectService
+        .updateProject(this.projectId, updatedProject)
+        .subscribe(
+          (response) => {
+            console.log('Projeto atualizado com sucesso:', response);
+          },
+          (error) => {
+            console.error('Erro ao atualizar projeto:', error);
+          }
+        );
     }
   }
-  // ngOnInit(): void {
-  //   this.route.paramMap.subscribe(params => {
-  //     const id = params.get('id');
-  //     this.projectId = id ? +id : null; // Convertendo para número
-  //     if (this.projectId !== null) {
-  //       this.loadProjectDetails(this.projectId);
-  //     }
-  //   });
-  // }
-
-  // loadProjectDetails(id: number): void {
-  //   this.projectService.getProjectById(id).subscribe(
-  //     (project) => this.project = project,
-  //     (error) => console.error('Error fetching project details', error)
-  //   );
-  // }
 
 }
