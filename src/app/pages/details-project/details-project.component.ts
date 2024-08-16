@@ -6,23 +6,33 @@ import { CommonModule } from '@angular/common';
 import { ProjectEditInfoComponent } from "../../components/project-edit-info/project-edit-info.component";
 import { ServiceContainerComponent } from "../../components/service-container/service-container.component";
 import { ServiceCardComponent } from "../../components/service-card/service-card.component";
+import { CategoryService } from '../../services/category.service';
 
 @Component({
-  selector: 'app-edit-project',
+  selector: 'app-details-project',
   standalone: true,
-  imports: [CommonModule, ProjectEditInfoComponent, ProjectEditInfoComponent, ServiceContainerComponent, ServiceCardComponent],
+  imports: [CommonModule, ProjectEditInfoComponent, ServiceContainerComponent, ServiceCardComponent],
   templateUrl: './details-project.component.html',
-  styleUrl: './details-project.component.scss',
+  styleUrls: ['./details-project.component.scss'],
 })
-export class DetailsProjectComponent implements OnInit{
-  //project: Project = {id: 1, title: 'teste', budget: 100, category: 'Other', description: 'teste teste teste', startDate: '', endDate: ''};
-  //projectId: number | null = null;
-  project!: Project;
+export class DetailsProjectComponent implements OnInit {
+  project: Project = {
+    id: 0,
+    title: '',
+    description: '',
+    category: '',
+    startDate: '',
+    endDate: '',
+    budget: 0,
+    services: []
+  };
+  categoryColor: string = '';
 
   constructor(
     private route: ActivatedRoute,
-    private projectService: ProjectService
-  ) { }
+    private projectService: ProjectService,
+    private categoryService: CategoryService,
+  ) {}
 
   ngOnInit(): void {
     const id = Number(this.route.snapshot.paramMap.get('id'));
@@ -30,30 +40,12 @@ export class DetailsProjectComponent implements OnInit{
       this.projectService.getProjectById(id).subscribe({
         next: (data) => {
           this.project = data;
-          //this.isLoading = false;
+          this.categoryColor = this.categoryService.getCategoryInfo(this.project.category)?.color || '#000';
         },
         error: (err) => {
-          //this.errorMessage = 'Failed to load project details.';
-          //this.isLoading = false;
+          console.error('Erro ao carregar os detalhes do projeto', err);
         }
       });
     }
   }
-  // ngOnInit(): void {
-  //   this.route.paramMap.subscribe(params => {
-  //     const id = params.get('id');
-  //     this.projectId = id ? +id : null; // Convertendo para número
-  //     if (this.projectId !== null) {
-  //       this.loadProjectDetails(this.projectId);
-  //     }
-  //   });
-  // }
-
-  // loadProjectDetails(id: number): void {
-  //   this.projectService.getProjectById(id).subscribe(
-  //     (project) => this.project = project,
-  //     (error) => console.error('Error fetching project details', error)
-  //   );
-  // }
-
 }

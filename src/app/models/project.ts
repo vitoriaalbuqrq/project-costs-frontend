@@ -1,3 +1,5 @@
+import { ProjectServices } from "./projectServices";
+
 export interface Project {
   id?: number;
   title: string;
@@ -6,4 +8,5 @@ export interface Project {
   startDate: string; 
   endDate: string; 
   budget: number;
+  services?: ProjectServices[]; 
 }
