@@ -63,7 +63,8 @@ export class NewProjectComponent {
         category: formValue.projectCategory,
         startDate: formValue.projectStartDate,
         endDate: formValue.projectEndDate,
-        budget: formValue.projectBudget
+        budget: formValue.projectBudget,
+        cost: 0
       };
 
       this.projectService.createProject(project).subscribe(

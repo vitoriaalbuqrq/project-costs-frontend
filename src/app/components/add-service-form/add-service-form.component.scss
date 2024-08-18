@@ -1,0 +1,32 @@
+@import '../../../styles/variables.scss';
+
+.container-form{
+  background-color: #fff;
+  box-shadow: $box-shadow-primary;
+  padding: 30px;
+  border-radius: 10px;
+  text-align: center;
+  margin-bottom: 40px;
+  
+  form{
+    margin-top: 20px;
+  }
+
+  .actions{
+    display: flex;
+    justify-content: end;
+
+    button{
+      text-align: end;
+      border-radius: 8px;
+      font-size: 15px;
+      font-weight: 500;
+      padding: 5px 15px;
+      border: none;
+      background-color: $primary-color;
+      color: #fff;
+      cursor: pointer;
+      
+    }
+  }
+}

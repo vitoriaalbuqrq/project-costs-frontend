@@ -1,0 +1,30 @@
+<div class="container-form">
+  <h3>Adicione um serviço</h3>
+  <p>Preencha as informações sobre o serviço</p>
+  <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+    <app-form-input
+      formControlName="serviceName"
+      inputName="serviceName"
+      type="text"
+      label="Nome"
+      placeholder="Informe o nome do serviço"
+  ></app-form-input>
+  <app-form-input
+      formControlName="serviceDescription"
+      inputName="serviceDescription"
+      type="text"
+      label="Descrição"
+      placeholder="Informe a descrição do serviço"
+  ></app-form-input>
+  <app-form-input
+      formControlName="serviceBudget"
+      inputName="serviceBudget"
+      type="number"
+      label="Custo do serviço"
+  ></app-form-input>
+
+  <div class="actions">
+    <button type="submit">Salvar serviço</button>
+  </div>
+  </form>  
+</div>

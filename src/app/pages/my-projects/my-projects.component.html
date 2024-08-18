@@ -3,9 +3,16 @@
     <h2>Meus Projetos</h2>
   </div>
   <div class="projects-container">
-    <app-project
-      *ngFor="let project of projects"
-      [project]="project">
-    ></app-project>
+    <div class="no-projects" *ngIf="!projects || projects.length === 0">
+      <div>
+        <h1>Você ainda não tem projetos cadastrados.</h1>
+        <a routerLink="/user/newproject">Criar projeto</a>
+      </div>
+      <div>
+        <img src="/assets/svg/no-projects.svg" />
+      </div>
+    </div>
+    <app-project *ngFor="let project of projects" [project]="project">
+      ></app-project>
   </div>
 </main>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ProjectService } from '../../services/project.service';
 import { ActivatedRoute } from '@angular/router';
 import { Project } from '../../models/project';
@@ -7,6 +7,8 @@ import { ProjectEditInfoComponent } from "../../components/project-edit-info/pro
 import { ServiceContainerComponent } from "../../components/service-container/service-container.component";
 import { ServiceCardComponent } from "../../components/service-card/service-card.component";
 import { CategoryService } from '../../services/category.service';
+import { ProjectServices } from '../../models/projectServices';
+import { ProjectServicesService } from '../../services/project-services.service';
 
 @Component({
   selector: 'app-details-project',
@@ -24,28 +26,62 @@ export class DetailsProjectComponent implements OnInit {
     startDate: '',
     endDate: '',
     budget: 0,
+    cost: 0,
     services: []
   };
   categoryColor: string = '';
-
+  projectId!: number;
+  services: ProjectServices[] = [];
+  
   constructor(
     private route: ActivatedRoute,
     private projectService: ProjectService,
     private categoryService: CategoryService,
+    private projectServicesService: ProjectServicesService,
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
-    const id = Number(this.route.snapshot.paramMap.get('id'));
-    if (id) {
-      this.projectService.getProjectById(id).subscribe({
+    this.projectId = Number(this.route.snapshot.paramMap.get('id'));
+    if (this.projectId) {
+      this.projectService.getProjectById(this.projectId).subscribe({
         next: (data) => {
           this.project = data;
+          this.project.services = this.project.services || [];
           this.categoryColor = this.categoryService.getCategoryInfo(this.project.category)?.color || '#000';
         },
         error: (err) => {
           console.error('Erro ao carregar os detalhes do projeto', err);
         }
       });
+      this.loadServices();
+
     }
   }
+
+  loadServices(): void {
+    this.projectServicesService.getServicesByProjectId(this.projectId).subscribe(
+      (services) => {
+        this.services = services;
+      },
+      (error) => {
+        console.log('Erro ao carregar serviços:', error);
+      }
+    );
+  }
+  
+  onServiceCreated(newService: ProjectServices): void {
+    if (this.project.services) {
+      this.project.services.push(newService);
+    } else {
+      this.project.services = [newService];
+    }
+    if (this.project.cost === undefined) {
+      this.project.cost = 0;
+    }
+    this.project.cost += newService.budget;
+    this.cdr.detectChanges();
+  }
+
+  
 }

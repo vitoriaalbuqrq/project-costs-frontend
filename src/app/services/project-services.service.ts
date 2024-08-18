@@ -19,7 +19,7 @@ export class ProjectServicesService {
     return this.httpClient.get<ProjectServices>(`${this.apiUrl}/${projectId}/services/${serviceId}`);
   }
 
-  createService(projectId: number, service: ProjectServices): Observable<ProjectServices> {
+  addService(projectId: number, service: ProjectServices): Observable<ProjectServices> {
     return this.httpClient.post<ProjectServices>(`${this.apiUrl}/${projectId}/services`, service);
   }
 

@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AddServiceModalComponent } from './add-service-modal.component';
+import { AddServiceFormComponent } from './add-service-form.component';
 
-describe('AddServiceModalComponent', () => {
-  let component: AddServiceModalComponent;
-  let fixture: ComponentFixture<AddServiceModalComponent>;
+describe('AddServiceFormComponent', () => {
+  let component: AddServiceFormComponent;
+  let fixture: ComponentFixture<AddServiceFormComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AddServiceModalComponent]
+      imports: [AddServiceFormComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(AddServiceModalComponent);
+    fixture = TestBed.createComponent(AddServiceFormComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

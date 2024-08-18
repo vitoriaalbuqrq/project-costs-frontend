@@ -13,7 +13,7 @@ import { Category } from '../../models/enum/category.enum';
   styleUrl: './project.component.scss'
 })
 export class ProjectComponent {
-  @Input() project: Project = {id: 0, title: '', budget: 0, category: Category.Other, description: '', startDate: '', endDate: '', services: []};
+  @Input() project: Project = {id: 0, title: '', budget: 0, cost: 0,  category: Category.Other, description: '', startDate: '', endDate: '', services: []};
 
   constructor(private categoryService: CategoryService){}
 

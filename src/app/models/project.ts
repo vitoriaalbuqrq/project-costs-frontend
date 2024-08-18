@@ -8,5 +8,6 @@ export interface Project {
   startDate: string; 
   endDate: string; 
   budget: number;
+  cost?: number;
   services?: ProjectServices[]; 
 }

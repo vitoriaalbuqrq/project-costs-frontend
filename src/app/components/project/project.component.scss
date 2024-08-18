@@ -1,10 +1,13 @@
+@import '../../../styles/variables.scss';
+
 .container-info {
   display: flex;
   flex-direction: column;
   justify-items: stretch;
   border-radius: 10px;
   width: 280px;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+  box-shadow: $box-shadow-primary;
+  background-color: #fff;
   padding: 20px;
   //transition: transform 0.3s ease;
   
@@ -18,10 +21,12 @@
 
   p {
     font-size: 18px;
-    font-weight: 500;
+    font-weight: 650;
+    color: $green-color;
 
     span {
       font-size: 14px;
+      color: $text-color;
     }
   }
 
@@ -50,7 +55,9 @@
       margin-left: 10px;
       
       p {
-        font-size: 10px;
+        font-size: 11px;
+        font-weight: 550;
+        color: $gray-light;
       }
       h5 {
         font-size: 16px;
@@ -69,17 +76,23 @@
     a {
       text-decoration: none;
       text-align: center;
-      color: #000;
       padding: 5px 10px;
-      border: 1px solid #000;
       border-radius: 5px;
       flex: 1;
       cursor: pointer;
       transition: transform 0.2s ease;
+      background-color: $gray-light;
+      color: #fff;
       
-       &:hover{
-         transform: scale(1.03);
-       }
+      &:hover{
+        transform: scale(1.03);
+      }
+    }
+    
+    .delete-btn{
+      color: $text-color;
+      border: 1px solid $text-color;
+      background-color: transparent;
     }
   }
 

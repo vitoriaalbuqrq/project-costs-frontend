@@ -9,9 +9,9 @@
     </div>
   </div>
   <h6>Orçamento:</h6>
-  <p>R$ {{ project.budget }} <span>/ 10.000,000</span></p>
+  <p>R$ {{ project.budget.toFixed(2) }} <span>/{{ project.cost}}</span></p>
   <div class="action-buttons">
-    <a [routerLink]="['/user/detailsproject', project.id]">Editar</a>
-    <a >Excluir</a>
+    <a class="delete-btn">Excluir</a>
+    <a [routerLink]="['/user/detailsproject', project.id]">Ver mais</a>
   </div>
 </div>

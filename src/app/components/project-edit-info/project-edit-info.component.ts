@@ -3,7 +3,6 @@ import { Project } from '../../models/project';
 import { CategoryService } from '../../services/category.service';
 import { RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { Category } from '../../models/enum/category.enum';
 
 @Component({
   selector: 'app-project-edit-info',

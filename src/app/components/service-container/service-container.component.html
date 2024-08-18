@@ -1,10 +1,17 @@
 <div class="container">
   <div class="header">
     <h2>Serviços</h2>
-    <a>Adicionar</a>
+    <a (click)="toggleFormVisibility()">
+      {{ isFormVisible ? 'Fechar' : 'Adicionar Serviço' }}
+    </a>
   </div>
+  
+  <app-add-service-form *ngIf="isFormVisible"
+    [formGroup]="serviceAddForm"
+    (formSubmit)="submit()">
+  </app-add-service-form>
 
-  <div>
+  <div class="services-cards">
     <ng-content></ng-content>
   </div>
 

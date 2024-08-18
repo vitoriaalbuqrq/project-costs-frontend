@@ -1,3 +1,5 @@
+@import '../../../styles/variables.scss';
+
 main{
   padding: 3em 4em;
 
@@ -13,5 +15,34 @@ main{
     align-items: stretch;
     flex-wrap: wrap;
     gap: 25px;
+    
+    .no-projects{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-grow: 1;
+
+      :nth-child(1){
+        flex: 0.5;
+
+        a{
+          background-color: $primary-color;
+          padding: 5px 10px;
+          border-radius: 10px;
+          color: $gray-bg;
+          text-decoration: none;
+        }
+        
+        h1{
+          font-size: 30px;
+          margin-bottom: 20px;
+          color: $text-color;
+        }
+      }
+
+      img{
+        width: 400px;
+      }
+    }
   }
 }
