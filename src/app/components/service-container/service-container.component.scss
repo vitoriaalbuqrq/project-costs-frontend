@@ -6,7 +6,8 @@
   .header{
     display: flex;
     justify-content: space-between;
-    margin-bottom: 20px;
+    align-items: center;
+    margin-bottom: 30px;
 
     a {
       border-radius: 8px;
@@ -20,6 +21,7 @@
       cursor: pointer;
       text-decoration: none;
     }
+
   }
 
   .services-cards{

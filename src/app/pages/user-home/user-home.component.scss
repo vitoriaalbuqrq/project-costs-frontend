@@ -1,0 +1,32 @@
+@import '../../../styles/variables.scss';
+
+section{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 30px 50px;
+
+  .section-text{
+    flex:0.7;
+
+    h1{
+      margin-bottom: 30px;
+      font-size: 38px;
+      line-height: 1.2em;
+    }
+
+    p{
+      line-height: 1.7em;
+      font-weight: 500;
+      color: $text-color;
+    }
+  }
+  div{
+    align-items: center;
+  }
+
+  img{
+    width: 500px;
+    height: auto;
+  }
+}

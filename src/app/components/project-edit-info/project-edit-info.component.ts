@@ -13,6 +13,7 @@ import { CommonModule } from '@angular/common';
 })
 export class ProjectEditInfoComponent {
   @Input() project!: Project;
+  @Input() borderBottom!: string;
   
   constructor(private categoryService: CategoryService){}
 

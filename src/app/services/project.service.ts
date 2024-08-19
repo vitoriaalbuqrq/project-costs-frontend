@@ -27,4 +27,8 @@ export class ProjectService {
     return this.httpClient.put<Project>(`${this.apiUrl}/${id}`, project);
   }
 
+  deleteProject(id: number): Observable<void> {
+    return this.httpClient.delete<void>(`${this.apiUrl}/${id}`);
+  }
+
 }

@@ -13,7 +13,7 @@ export class CategoryService {
     [Category.Testing]: { color: '#9b59b6', icon: 'bi-journal-check' },
     [Category.Operations]: { color: '#7FD8BE', icon: 'bi-gear' },
     [Category.Sales]: { color: '#FABC2A', icon: 'bi-cart' },
-    [Category.Support]: { color: '#FFCAB1', icon: 'bi-headset' },
+    [Category.Support]: { color: '#f79568', icon: 'bi-headset' },
     [Category.Finance]: { color: '#A1FCDF', icon: 'bi-bar-chart' },
     [Category.Other]: { color: '#34495e', icon: 'bi-question-circle' }
   };

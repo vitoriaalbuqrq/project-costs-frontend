@@ -1,7 +1,8 @@
 <main>
-  <app-project-edit-info *ngIf="project" [project]="project"></app-project-edit-info>
+  <app-project-edit-info *ngIf="project" [project]="project" [borderBottom]="categoryColor"></app-project-edit-info>
 
-  <app-service-container (serviceCreated)="onServiceCreated($event)">
+  <app-service-container 
+    (serviceCreated)="onServiceCreated($event)">
     <p *ngIf="project.services?.length === 0">Nenhum serviço adicionado para este projeto.</p>
     <app-service-card 
       *ngFor="let service of project.services" 

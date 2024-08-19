@@ -11,7 +11,7 @@
   <h6>Orçamento:</h6>
   <p>R$ {{ project.budget.toFixed(2) }} <span>/{{ project.cost}}</span></p>
   <div class="action-buttons">
-    <a class="delete-btn">Excluir</a>
+    <a class="delete-btn" (click)="openDialog()">Excluir</a>
     <a [routerLink]="['/user/detailsproject', project.id]">Ver mais</a>
   </div>
 </div>

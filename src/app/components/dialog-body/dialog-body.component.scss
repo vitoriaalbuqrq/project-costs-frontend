@@ -1,0 +1,65 @@
+@import '../../../styles/variables.scss';
+
+.container{
+  padding: 20px;
+
+  .header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: nowrap;
+    margin-bottom: 15px;
+
+    .icon-warning{
+      color: red;
+      background-color: #ffc0c0;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    div{
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .icon-close{
+      cursor: pointer;
+    }
+
+  }
+  .body{
+    padding: 20px 0;
+  }
+
+  .actions-btn{
+    display: flex;
+    justify-content: end;
+    gap: 15px;
+
+    button{
+      padding: 10px 15px;
+      border-radius: 10px;
+      border: none;
+      color: #fff;  
+      cursor: pointer;
+      opacity: 0.8;
+
+      &:hover{
+        opacity: 1;
+      }
+    }
+    .btn-cancel{
+      background-color: $gray-light;
+    }
+
+    .btn-confirm{
+      background-color: $red-color;
+    }
+
+  }
+}

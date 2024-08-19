@@ -1,8 +1,8 @@
 @import "../../../styles/variables.scss";
 
 main {
-  min-height: 100vh;
   width: 50%;
+  flex: 1;
   margin: 0 auto;
-
+  margin-bottom: 30px;
 }

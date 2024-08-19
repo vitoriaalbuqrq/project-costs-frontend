@@ -9,7 +9,7 @@
         <h5>{{ project.title }}</h5>
       </div>
     </div>
-    <div class="header-btn">
+    <div class="header-btn" [ngStyle]="{ 'background-color': borderBottom}">
       <a [routerLink]="['/user/editproject', project.id]">Editar Projeto</a>
     </div>
   </div>

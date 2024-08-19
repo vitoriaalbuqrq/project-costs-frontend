@@ -4,12 +4,12 @@ import { ProjectComponent } from "../../components/project/project.component";
 import { Project } from '../../models/project';
 import { ProjectService } from '../../services/project.service';
 import { CommonModule } from '@angular/common';
-import { CategoryService } from '../../services/category.service';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-my-projects',
   standalone: true,
-  imports: [CommonModule, RouterLink, ProjectComponent],
+  imports: [CommonModule, RouterLink, ProjectComponent, MatDialogModule],
   providers: [
     ProjectService
   ],
@@ -21,13 +21,19 @@ export class MyProjectsComponent {
 
   constructor(
     private projectService: ProjectService,
-    private categoryService: CategoryService
   ) {}
 
   ngOnInit(): void {
-    this.projectService.getProjects().subscribe(projects => {
-      this.projects = projects;
-    })
+    this.loadProjects();
   }
 
+  private loadProjects(): void {
+    this.projectService.getProjects().subscribe(projects => {
+      this.projects = projects;
+    });
+  }
+
+  onProjectDeleted(): void {
+    this.loadProjects();
+  }
 }

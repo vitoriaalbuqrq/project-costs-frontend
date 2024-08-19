@@ -7,6 +7,7 @@ import { MyProjectsComponent } from './pages/my-projects/my-projects.component';
 import { DetailsProjectComponent} from './pages/details-project/details-project.component';
 import { UserComponent } from './pages/user/user.component';
 import { EditProjectComponent } from './pages/edit-project/edit-project.component';
+import { UserHomeComponent } from './pages/user-home/user-home.component';
 
 export const routes: Routes = [
     {
@@ -22,6 +23,10 @@ export const routes: Routes = [
         component: UserComponent,
         // canActivate: [AuthGuard],
         children: [
+            {
+                path: "",
+                component: UserHomeComponent,
+            },
             {
                 path: "newproject",
                 component: NewProjectComponent,

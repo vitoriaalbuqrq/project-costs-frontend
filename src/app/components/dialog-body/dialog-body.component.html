@@ -1,0 +1,17 @@
+<div class="container">
+  <div class="header">
+    <div>
+      <mat-icon class="icon-warning">warning</mat-icon>
+      <h2>Excluir projeto</h2>
+    </div>
+    <mat-icon (click)="onCloseIconClick()" class="icon-close">close</mat-icon>
+  </div>
+  <hr>
+  <div class="body">
+    <p>Você tem certeza que deseja excluir {{ data.item }}?</p>
+  </div>
+  <div class="actions-btn">
+    <button (click)="onCancel()" class="btn-cancel">Cancelar</button>
+    <button (click)="onConfirm()" class="btn-confirm">Confirmar</button>
+  </div>
+</div>
