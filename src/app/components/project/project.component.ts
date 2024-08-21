@@ -7,6 +7,7 @@ import { Category } from '../../models/enum/category.enum';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogBodyComponent } from '../dialog-body/dialog-body.component';
 import { ProjectService } from '../../services/project.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-project',
@@ -19,7 +20,11 @@ export class ProjectComponent {
   @Input() project: Project = {id: 0, title: '', budget: 0, cost: 0,  category: Category.Other, description: '', startDate: '', endDate: '', services: []};
   @Output() projectDeleted = new EventEmitter<void>();
   
-  constructor(private projectService: ProjectService, private categoryService: CategoryService, private matDialog: MatDialog){}
+  constructor(private projectService: ProjectService,
+    private categoryService: CategoryService,
+    private matDialog: MatDialog,
+    private toastService: ToastrService
+  ){}
 
   getCategoryInfo() {
     return this.categoryService.getCategoryInfo(this.project.category);
@@ -42,15 +47,15 @@ export class ProjectComponent {
     if (this.project.id !== undefined) {
       this.projectService.deleteProject(this.project.id).subscribe({
         next: () => {
-          console.log('Projeto excluído');
+          this.toastService.success('Projeto excluído com sucesso!');
           this.projectDeleted.emit();
         },
         error: (err) => {
-          console.error('Erro ao excluir o projeto:', err);
+          this.toastService.error('Erro ao excluir o projeto!');
         }
       });
     } else {
-      console.error('ID do projeto está indefinido, não é possível excluir.');
+      this.toastService.warning('ID do projeto está indefinido, não é possível excluir.');
     }
   }
   

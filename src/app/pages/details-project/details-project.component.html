@@ -7,7 +7,8 @@
     <app-service-card 
       *ngFor="let service of project.services" 
       [service]="service" 
-      [borderColor]="categoryColor">
+      [borderColor]="categoryColor"
+      (serviceDeleted)="onServiceDeleted($event)">
     </app-service-card>
   </app-service-container>
 </main>

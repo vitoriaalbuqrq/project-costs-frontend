@@ -20,6 +20,11 @@
       color: $text-color;
       cursor: pointer;
       text-decoration: none;
+      transition: transform 0.2s ease;
+      
+      &:hover{
+        transform: scale(1.03);
+      }
     }
 
   }

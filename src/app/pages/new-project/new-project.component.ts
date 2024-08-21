@@ -10,6 +10,7 @@ import { FormInputComponent } from "../../components/form/form-input/form-input.
 import { FormComponent } from "../../components/form/form.component";
 import { FormSelectComponent } from '../../components/form/form-select/form-select.component';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 interface ProjectForm {
   projectTitle: FormControl,
@@ -39,7 +40,11 @@ export class NewProjectComponent {
   projectCreateForm!: FormGroup<ProjectForm>;
   categories: Category[] = [];
 
-  constructor(private projectService: ProjectService, private categoryService: CategoryService, private router: Router) { }
+  constructor(private projectService: ProjectService, 
+    private categoryService: CategoryService, 
+    private router: Router,
+    private toastService: ToastrService
+  ) { }
 
   ngOnInit() {
     this.categories = Object.values(Category);
@@ -69,11 +74,11 @@ export class NewProjectComponent {
 
       this.projectService.createProject(project).subscribe(
         response => {
-          console.log('Projeto criado com sucesso:', response);
-          //this.router.navigate(['/projects']);
+          this.toastService.success('Projeto criado com sucesso!')
+          this.router.navigate(['/user/myprojects']);
         },
         error => {
-          console.error('Erro ao criar projeto:', error);
+          this.toastService.error('Erro ao criar projeto!')
         }
       );
     }

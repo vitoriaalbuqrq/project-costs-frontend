@@ -9,11 +9,12 @@ import { ServiceCardComponent } from "../../components/service-card/service-card
 import { CategoryService } from '../../services/category.service';
 import { ProjectServices } from '../../models/projectServices';
 import { ProjectServicesService } from '../../services/project-services.service';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-details-project',
   standalone: true,
-  imports: [CommonModule, ProjectEditInfoComponent, ServiceContainerComponent, ServiceCardComponent],
+  imports: [CommonModule, ProjectEditInfoComponent, ServiceContainerComponent, ServiceCardComponent, MatDialogModule],
   templateUrl: './details-project.component.html',
   styleUrls: ['./details-project.component.scss'],
 })
@@ -83,5 +84,11 @@ export class DetailsProjectComponent implements OnInit {
     this.cdr.detectChanges();
   }
 
+  onServiceDeleted(serviceId: number): void {
+    if (this.project.services) {
+      this.project.services = this.project.services.filter(service => service.id !== serviceId);
+      this.cdr.detectChanges();
+    }
+  }  
   
 }

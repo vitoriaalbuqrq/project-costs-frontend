@@ -8,10 +8,10 @@ import {
 import { Category } from '../../models/enum/category.enum';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProjectService } from '../../services/project.service';
-import { CategoryService } from '../../services/category.service';
 import { Project } from '../../models/project';
 import { CommonModule } from '@angular/common';
 import { FormComponent } from '../../components/form/form.component';
+import { ToastrService } from 'ngx-toastr';
 
 interface ProjectForm {
   projectTitle: FormControl;
@@ -37,8 +37,8 @@ export class EditProjectComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private projectService: ProjectService,
-    private categoryService: CategoryService,
-    private router: Router
+    private router: Router,
+    private toastService: ToastrService
   ) {
     //Inicializa o form vazio
     this.projectEditForm = new FormGroup<ProjectForm>({
@@ -94,10 +94,11 @@ export class EditProjectComponent implements OnInit {
         .updateProject(this.projectId, updatedProject)
         .subscribe(
           (response) => {
-            console.log('Projeto atualizado com sucesso:', response);
+            this.toastService.success('Projeto atualizado com sucesso!');
+            this.router.navigate(['/user/myprojects']);
           },
           (error) => {
-            console.error('Erro ao atualizar projeto:', error);
+            this.toastService.error('Erro ao atualizar projeto!');
           }
         );
     }
