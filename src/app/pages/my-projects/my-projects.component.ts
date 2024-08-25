@@ -5,6 +5,7 @@ import { Project } from '../../models/project';
 import { ProjectService } from '../../services/project.service';
 import { CommonModule } from '@angular/common';
 import { MatDialogModule } from '@angular/material/dialog';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-my-projects',
@@ -21,6 +22,7 @@ export class MyProjectsComponent {
 
   constructor(
     private projectService: ProjectService,
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {

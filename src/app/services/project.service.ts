@@ -1,5 +1,5 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Project } from '../models/project';
 
@@ -7,28 +7,28 @@ import { Project } from '../models/project';
   providedIn: 'root'
 })
 export class ProjectService {
-  private apiUrl = 'http://localhost:8080/projects';
 
-  constructor(private httpClient: HttpClient) { }
+  private baseUrl = 'http://localhost:8080/projects';
+
+  constructor(private http: HttpClient) { }
 
   getProjects(): Observable<Project[]> {
-    return this.httpClient.get<Project[]>(this.apiUrl);
+    return this.http.get<Project[]>(this.baseUrl);
   }
 
-  getProjectById(id: number): Observable<Project> {
-    return this.httpClient.get<Project>(`${this.apiUrl}/${id}`);
+  getProjectById(projectId: number): Observable<Project> {
+    return this.http.get<Project>(`${this.baseUrl}/${projectId}`);
   }
 
-  createProject(project: Project): Observable<Project>{
-    return this.httpClient.post<Project>(this.apiUrl, project);
+  createProject(project: Project): Observable<Project> {
+    return this.http.post<Project>(this.baseUrl, project);
   }
 
-  updateProject(id: number, project: Project): Observable<Project> {
-    return this.httpClient.put<Project>(`${this.apiUrl}/${id}`, project);
+  updateProject(projectId: number, project: Project): Observable<Project> {
+    return this.http.put<Project>(`${this.baseUrl}/${projectId}`, project);
   }
 
-  deleteProject(id: number): Observable<void> {
-    return this.httpClient.delete<void>(`${this.apiUrl}/${id}`);
+  deleteProject(projectId: number): Observable<void> {
+    return this.http.delete<void>(`${this.baseUrl}/${projectId}`);
   }
-
 }

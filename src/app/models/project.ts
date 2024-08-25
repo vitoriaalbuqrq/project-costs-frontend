@@ -9,5 +9,6 @@ export interface Project {
   endDate: string; 
   budget: number;
   cost?: number;
-  services?: ProjectServices[]; 
+  services?: ProjectServices[];
+  userId?: number; 
 }

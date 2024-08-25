@@ -11,6 +11,7 @@ import { FormComponent } from "../../components/form/form.component";
 import { FormSelectComponent } from '../../components/form/form-select/form-select.component';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { AuthService } from '../../services/auth.service';
 
 interface ProjectForm {
   projectTitle: FormControl,
@@ -43,7 +44,8 @@ export class NewProjectComponent {
   constructor(private projectService: ProjectService, 
     private categoryService: CategoryService, 
     private router: Router,
-    private toastService: ToastrService
+    private toastService: ToastrService,
+    private authService: AuthService
   ) { }
 
   ngOnInit() {
@@ -69,7 +71,7 @@ export class NewProjectComponent {
         startDate: formValue.projectStartDate,
         endDate: formValue.projectEndDate,
         budget: formValue.projectBudget,
-        cost: 0
+        cost: 0,
       };
 
       this.projectService.createProject(project).subscribe(
