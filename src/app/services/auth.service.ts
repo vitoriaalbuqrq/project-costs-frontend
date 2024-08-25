@@ -18,11 +18,9 @@ export class AuthService {
 
   login(email: string, password: string): Observable<any> {
     return this.http.post('http://localhost:8080/auth/login', { email, password }).pipe(
-      tap((response: any) => {
-        this.doLoginUser(email, response.token);
-      })
+      tap((response: any) => this.doLoginUser(email, response.token))
     );
-  }  
+  }
 
   private doLoginUser(email: string, token: string) {
     this.storeJwtToken(token);
@@ -61,7 +59,7 @@ export class AuthService {
   refreshToken(): Observable<any> {
     const token = this.getJwtToken();
     if (!token) {
-      return of(null); 
+      return of(null); // Retorna um Observable vazio se não houver token
     }
 
     return this.http.post<any>('http://localhost:8080/auth/refresh-token', { token }).pipe(
