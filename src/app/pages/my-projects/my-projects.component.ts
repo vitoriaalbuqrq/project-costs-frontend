@@ -6,11 +6,12 @@ import { ProjectService } from '../../services/project.service';
 import { CommonModule } from '@angular/common';
 import { MatDialogModule } from '@angular/material/dialog';
 import { AuthService } from '../../services/auth.service';
+import { LoadingspinnerComponent } from "../../components/loadingspinner/loadingspinner.component";
 
 @Component({
   selector: 'app-my-projects',
   standalone: true,
-  imports: [CommonModule, RouterLink, ProjectComponent, MatDialogModule],
+  imports: [CommonModule, RouterLink, ProjectComponent, MatDialogModule, LoadingspinnerComponent],
   providers: [
     ProjectService
   ],
@@ -19,10 +20,10 @@ import { AuthService } from '../../services/auth.service';
 })
 export class MyProjectsComponent {
   projects: Project[] = [];
+  isLoading: boolean = true;
 
   constructor(
     private projectService: ProjectService,
-    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
@@ -32,10 +33,12 @@ export class MyProjectsComponent {
   private loadProjects(): void {
     this.projectService.getProjects().subscribe(projects => {
       this.projects = projects;
+      this.isLoading = false;
     });
   }
 
   onProjectDeleted(): void {
+    this.isLoading = true;
     this.loadProjects();
   }
 }

@@ -10,11 +10,12 @@ import { CategoryService } from '../../services/category.service';
 import { ProjectServices } from '../../models/projectServices';
 import { ProjectServicesService } from '../../services/project-services.service';
 import { MatDialogModule } from '@angular/material/dialog';
+import { LoadingspinnerComponent } from "../../components/loadingspinner/loadingspinner.component";
 
 @Component({
   selector: 'app-details-project',
   standalone: true,
-  imports: [CommonModule, ProjectEditInfoComponent, ServiceContainerComponent, ServiceCardComponent, MatDialogModule],
+  imports: [CommonModule, ProjectEditInfoComponent, ServiceContainerComponent, ServiceCardComponent, MatDialogModule, LoadingspinnerComponent],
   templateUrl: './details-project.component.html',
   styleUrls: ['./details-project.component.scss'],
 })
@@ -33,6 +34,7 @@ export class DetailsProjectComponent implements OnInit {
   categoryColor: string = '';
   projectId!: number;
   services: ProjectServices[] = [];
+  isLoading: boolean = true;
   
   constructor(
     private route: ActivatedRoute,
@@ -45,6 +47,7 @@ export class DetailsProjectComponent implements OnInit {
   ngOnInit(): void {
     this.projectId = Number(this.route.snapshot.paramMap.get('id'));
     if (this.projectId) {
+      this.isLoading = true;
       this.projectService.getProjectById(this.projectId).subscribe({
         next: (data) => {
           this.project = data;
@@ -53,6 +56,7 @@ export class DetailsProjectComponent implements OnInit {
         },
         error: (err) => {
           console.error('Erro ao carregar os detalhes do projeto', err);
+          this.isLoading = false;
         }
       });
       this.loadServices();
@@ -64,6 +68,7 @@ export class DetailsProjectComponent implements OnInit {
     this.projectServicesService.getServicesByProjectId(this.projectId).subscribe(
       (services) => {
         this.services = services;
+        this.isLoading = false;
       },
       (error) => {
         console.log('Erro ao carregar serviços:', error);

@@ -12,6 +12,7 @@ import { Project } from '../../models/project';
 import { CommonModule } from '@angular/common';
 import { FormComponent } from '../../components/form/form.component';
 import { ToastrService } from 'ngx-toastr';
+import { LoadingspinnerComponent } from "../../components/loadingspinner/loadingspinner.component";
 
 interface ProjectForm {
   projectTitle: FormControl;
@@ -25,7 +26,7 @@ interface ProjectForm {
 @Component({
   selector: 'app-edit-project',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, FormComponent],
+  imports: [CommonModule, ReactiveFormsModule, FormComponent, LoadingspinnerComponent],
   templateUrl: './edit-project.component.html',
   styleUrl: './edit-project.component.scss',
 })
@@ -33,6 +34,7 @@ export class EditProjectComponent implements OnInit {
   projectEditForm!: FormGroup<ProjectForm>;
   categories: Category[] = [];
   projectId!: number;
+  isLoading: boolean = true;
 
   constructor(
     private route: ActivatedRoute,
@@ -56,10 +58,18 @@ export class EditProjectComponent implements OnInit {
     this.route.paramMap.subscribe((params) => {
       this.projectId = +params.get('id')!;
       if (this.projectId) {
+        this.isLoading = true;
         this.projectService
           .getProjectById(this.projectId)
-          .subscribe((project) => {
-            this.initializeForm(project);
+          .subscribe({
+            next: (project) => {
+              this.initializeForm(project);
+              this.isLoading = false; 
+            },
+            error: (err) => {
+              console.error('Erro ao carregar o projeto:', err);
+              this.isLoading = false; 
+            }
           });
       }
     });

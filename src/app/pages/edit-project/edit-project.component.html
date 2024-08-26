@@ -1,11 +1,14 @@
 <main>
-  <app-form
-    title="Editar Projeto"
-    subtitle="Atualize as informações do projeto"
-    primaryBtnText="Salvar alterações"
-    [formGroup]="projectEditForm"
-    [categories]="categories"
-    [disablePrimaryButton]="!projectEditForm.valid"
-    (formSubmit)="submit()">
-  </app-form>
+  <app-loadingspinner *ngIf="isLoading"></app-loadingspinner>
+    <div *ngIf="!isLoading">
+      <app-form
+        title="Editar Projeto"
+        subtitle="Atualize as informações do projeto"
+        primaryBtnText="Salvar alterações"
+        [formGroup]="projectEditForm"
+        [categories]="categories"
+        [disablePrimaryButton]="!projectEditForm.valid"
+        (formSubmit)="submit()">
+      </app-form>
+  </div>
 </main>

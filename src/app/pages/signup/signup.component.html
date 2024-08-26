@@ -1,5 +1,5 @@
 <app-default-login-layout 
-    title="Sign in and start today!"
+    title="Cadastre-se para começar!"
     primaryBtnText="Signup Now"
     secondaryBtnText="Login Now"
     (submit)="submit()"
@@ -11,35 +11,39 @@
             formControlName="name"
             inputName="name"
             type="text"
-            label="Your Name"
-            placeholder="John Doe"
+            label="Nome"
+            placeholder="Informe seu nome"
         >
-            <img src="/assets/svg/email-icon.svg"/>
+            <mat-icon class="icon-person">person</mat-icon>
+
         </app-primary-input>
         <app-primary-input
             formControlName="email"
             inputName="email"
             type="email"
-            label="Email"
-            placeholder="johndoe@gmail.com"
+            label="E-mail"
+            placeholder="Informe seu email"
         >
-            <img src="/assets/svg/email-icon.svg"/>
+            <mat-icon class="icon-email">email</mat-icon>
+
         </app-primary-input>
         <app-primary-input
             formControlName="password"
             inputName="password"
             type="password"
-            label="Your Password"
+            label="Senha"
         >
-            <img src="/assets/svg/password-icon.svg"/>
+            <mat-icon class="icon-lock">lock</mat-icon>
+
         </app-primary-input>
         <app-primary-input
             formControlName="passwordConfirm"
             inputName="passwordConfirm"
             type="password"
-            label="Confirm your Password"
+            label="Confirme sua senha"
         >
-            <img src="/assets/svg/password-icon.svg"/>
+           <mat-icon class="icon-lock">lock</mat-icon>
+
         </app-primary-input>
     </form>
 </app-default-login-layout>

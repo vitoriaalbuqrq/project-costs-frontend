@@ -7,7 +7,7 @@ import { Category } from '../models/enum/category.enum';
 export class CategoryService {
   private categoryMap: Record<Category, { color: string; icon: string }> = {
     [Category.Design]: { color: '#9b59b6', icon: 'bi-palette' },
-    [Category.Development]: { color: '#1b51e7', icon: 'bi-code-slash' },
+    [Category.Development]: { color: '#1b7ae7', icon: 'bi-code-slash' },
     [Category.Marketing]: { color: '#F76F8E', icon: 'bi-megaphone' },
     [Category.Research]: { color: '#F38D68', icon: 'bi-search' },
     [Category.Testing]: { color: '#a543cc', icon: 'bi-journal-check' },

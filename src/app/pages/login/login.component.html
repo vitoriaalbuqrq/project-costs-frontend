@@ -1,5 +1,5 @@
 <app-default-login-layout 
-    title="Login into your account"
+    title="Faça login em sua conta!"
     primaryBtnText="Login Now"
     secondaryBtnText="Signup Now"
     (submit)="submit()"
@@ -11,20 +11,20 @@
             formControlName="email"
             inputName="email"
             type="email"
-            label="Email"
-            placeholder="johndoe@gmail.com"
+            label="E-mail"
+            placeholder="Informe seu email"
         >
-            <img src="/assets/svg/email-icon.svg"/>
+        <mat-icon class="icon-email">email</mat-icon>
         </app-primary-input>
         <app-primary-input
             formControlName="password"
             inputName="password"
             type="password"
-            label="Your Password"
+            label="Informe sua senha"
         >
-        <img src="/assets/svg/password-icon.svg"/>
+        <mat-icon class="icon-lock">lock</mat-icon>
 
     </app-primary-input>
-    <span>Forgot password?</span>
+    <!-- <span>Forgot password?</span> -->
     </form>
 </app-default-login-layout>

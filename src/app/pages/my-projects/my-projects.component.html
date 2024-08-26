@@ -1,18 +1,22 @@
 <main>
-  <div class="title-container">
-    <h2>Meus Projetos</h2>
-  </div>
-  <div class="projects-container">
-    <div class="no-projects" *ngIf="!projects || projects.length === 0">
-      <div>
-        <h1>Você ainda não tem projetos cadastrados!</h1>
-        <a routerLink="/user/newproject">Criar projeto</a>
-      </div>
-      <div>
-        <img src="/assets/svg/no-projects.svg" />
-      </div>
+  <app-loadingspinner *ngIf="isLoading"></app-loadingspinner>
+
+  <div *ngIf="!isLoading" class="content">
+    <div class="title-container">
+      <h2>Meus Projetos</h2>
     </div>
-    <app-project *ngFor="let project of projects" [project]="project" (projectDeleted)="onProjectDeleted()">
-      ></app-project>
+    <div class="projects-container">
+      <div class="no-projects" *ngIf="!projects || projects.length === 0">
+        <div>
+          <h1>Você ainda não tem projetos cadastrados!</h1>
+          <a routerLink="/user/newproject">Criar projeto</a>
+        </div>
+        <div>
+          <img src="/assets/svg/no-projects.svg" />
+        </div>
+      </div>
+      <app-project *ngFor="let project of projects" [project]="project" (projectDeleted)="onProjectDeleted()">
+        ></app-project>
+    </div>
   </div>
 </main>

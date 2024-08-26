@@ -1,14 +1,22 @@
 <main>
-  <app-project-edit-info *ngIf="project" [project]="project" [borderBottom]="categoryColor"></app-project-edit-info>
+  <app-loadingspinner *ngIf="isLoading"></app-loadingspinner>
 
-  <app-service-container 
-    (serviceCreated)="onServiceCreated($event)">
-    <p *ngIf="project.services?.length === 0">Nenhum serviço adicionado para este projeto.</p>
-    <app-service-card 
-      *ngFor="let service of project.services" 
-      [service]="service" 
-      [borderColor]="categoryColor"
-      (serviceDeleted)="onServiceDeleted($event)">
-    </app-service-card>
-  </app-service-container>
+    <div *ngIf="!isLoading">
+      <app-project-edit-info 
+        *ngIf="project" 
+        [project]="project" 
+        [borderBottom]="categoryColor">
+      </app-project-edit-info>
+
+      <app-service-container 
+        (serviceCreated)="onServiceCreated($event)">
+        <p *ngIf="project.services?.length === 0">Nenhum serviço adicionado para este projeto.</p>
+        <app-service-card 
+          *ngFor="let service of project.services" 
+          [service]="service" 
+          [borderColor]="categoryColor"
+          (serviceDeleted)="onServiceDeleted($event)">
+        </app-service-card>
+      </app-service-container>
+  </div>
 </main>
