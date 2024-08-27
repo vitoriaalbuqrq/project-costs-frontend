@@ -5,14 +5,14 @@ main {
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    //height: 100%;
+    height: 100%;
 
     section {
         height: 100%;
         display: flex;
         flex-direction: column;
         align-items: center;
-        justify-content: center;
+        justify-content: start;
     }
     
     .main-section {
@@ -29,15 +29,18 @@ main {
 
     .form-section {
         flex-grow: 0.3;
-        padding: 0 35px;
+        padding: 20px 35px;
         background-color: #fff;
-        padding: 40px;
-
 
         .logo {
             margin-bottom: 15px;
-            width: 200px;
+            width: 100%;   
             height: auto;
+            text-align: center;
+
+            img{
+                width: 200px;
+            }
         }
 
         h2 {

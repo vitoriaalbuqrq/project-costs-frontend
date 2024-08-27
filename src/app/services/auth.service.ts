@@ -3,6 +3,7 @@ import { Injectable, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { jwtDecode } from 'jwt-decode';
 import { BehaviorSubject, Observable, of, tap } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -13,11 +14,12 @@ export class AuthService {
   private isAuthenticatedSubject = new BehaviorSubject<boolean>(false);
   private router = inject(Router);
   private http = inject(HttpClient);
+  private readonly baseUrl = environment.API_URL;
 
   constructor() {}
 
   login(email: string, password: string): Observable<any> {
-    return this.http.post('http://localhost:8080/auth/login', { email, password }).pipe(
+    return this.http.post(`${this.baseUrl}auth/login`, { email, password }).pipe(
       tap((response: any) => this.doLoginUser(email, response.token))
     );
   }
@@ -62,7 +64,7 @@ export class AuthService {
       return of(null); // Retorna um Observable vazio se não houver token
     }
 
-    return this.http.post<any>('http://localhost:8080/auth/refresh-token', { token }).pipe(
+    return this.http.post<any>(`${this.baseUrl}auth/refresh-token`, { token }).pipe(
       tap((response: any) => this.storeJwtToken(response.token))
     );
   }
