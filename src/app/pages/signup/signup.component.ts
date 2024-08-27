@@ -6,6 +6,8 @@ import { Router } from '@angular/router';
 import { LoginService } from '../../services/login.service';
 import { ToastrService } from 'ngx-toastr';
 import { MatIconModule } from '@angular/material/icon';
+import { LoadingspinnerComponent } from "../../components/loadingspinner/loadingspinner.component";
+import { CommonModule } from '@angular/common';
 
 interface SignupForm {
   name: FormControl,
@@ -18,11 +20,13 @@ interface SignupForm {
   selector: 'app-signup',
   standalone: true,
   imports: [
+    CommonModule,
     DefaultLoginLayoutComponent,
     ReactiveFormsModule,
     PrimaryInputComponent,
-    MatIconModule
-  ],
+    MatIconModule,
+    LoadingspinnerComponent
+],
   providers: [
     LoginService
   ],
@@ -31,11 +35,12 @@ interface SignupForm {
 })
 export class SignUpComponent {
   signupForm!: FormGroup<SignupForm>;
+  isLoading: boolean = false;
 
   constructor(
     private router: Router,
     private loginService: LoginService,
-    private toastService: ToastrService
+    private toastService: ToastrService,
   ){
     this.signupForm = new FormGroup({
       name: new FormControl('', [Validators.required, Validators.minLength(3)]),
@@ -45,13 +50,26 @@ export class SignUpComponent {
     })
   }
 
-  submit(){
-    this.loginService.signup(this.signupForm.value.name, this.signupForm.value.email, this.signupForm.value.password).subscribe({
-      next: () => {this.toastService.success("Cadastro realizado com sucesso!"),
-        this.router.navigate(['login']);
-      },
-      error: () => this.toastService.error("Erro inesperado! Tente novamente mais tarde")
-    })
+  submit() {
+    if (this.signupForm.valid) {
+      this.isLoading = true;
+      this.loginService.signup(
+        this.signupForm.value.name,
+        this.signupForm.value.email,
+        this.signupForm.value.password
+      ).subscribe({
+        next: () => {
+          this.toastService.success("Cadastro realizado com sucesso!");
+          this.router.navigate(['login']);
+        },
+        error: () => {
+          this.toastService.error("Erro inesperado! Tente novamente mais tarde");
+        },
+        complete: () => {
+          this.isLoading = false;
+        }
+      });
+    }
   }
 
   navigate(){

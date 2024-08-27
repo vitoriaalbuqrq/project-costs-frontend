@@ -6,6 +6,8 @@ import { Router } from '@angular/router';
 import { LoginService } from '../../services/login.service';
 import { ToastrService } from 'ngx-toastr';
 import { MatIconModule } from '@angular/material/icon';
+import { LoadingspinnerComponent } from "../../components/loadingspinner/loadingspinner.component";
+import { CommonModule } from '@angular/common';
 
 interface LoginForm {
   email: FormControl,
@@ -16,11 +18,13 @@ interface LoginForm {
   selector: 'app-login',
   standalone: true,
   imports: [
+    CommonModule,
     DefaultLoginLayoutComponent,
     ReactiveFormsModule,
     PrimaryInputComponent,
-    MatIconModule
-  ],
+    MatIconModule,
+    LoadingspinnerComponent
+],
   providers: [
     LoginService
   ],
@@ -29,6 +33,7 @@ interface LoginForm {
 })
 export class LoginComponent {
   loginForm!: FormGroup<LoginForm>;
+  isLoading: boolean = false;
 
   constructor(
     private router: Router,
@@ -41,14 +46,22 @@ export class LoginComponent {
     });
   }
 
-  submit(){
-    console.log(this.loginForm.value)
-    this.loginService.login(this.loginForm.value.email, this.loginForm.value.password).subscribe({
-      next: () => {this.toastService.success("Login realizado com sucesso!"),
-        this.router.navigate(['/user'])
-      },
-      error: () => this.toastService.error("Erro inesperado! Tente novamente mais tarde.")
-    })
+  submit() {
+    if (this.loginForm.valid) {
+      this.isLoading = true; 
+      this.loginService.login(this.loginForm.value.email, this.loginForm.value.password).subscribe({
+        next: () => {
+          this.toastService.success("Login realizado com sucesso!");
+          this.router.navigate(['/user']);
+        },
+        error: () => {
+          this.toastService.error("Erro inesperado! Tente novamente mais tarde.");
+        },
+        complete: () => {
+          this.isLoading = false;
+        }
+      });
+    }
   }
 
   navigate(){
