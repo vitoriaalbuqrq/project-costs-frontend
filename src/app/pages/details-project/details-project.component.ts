@@ -92,8 +92,9 @@ export class DetailsProjectComponent implements OnInit {
   onServiceDeleted(serviceId: number): void {
     if (this.project.services) {
       this.project.services = this.project.services.filter(service => service.id !== serviceId);
+      this.project.cost = this.project.services.reduce((acc, service) => acc + service.budget, 0);
       this.cdr.detectChanges();
     }
-  }  
+  }   
   
 }
